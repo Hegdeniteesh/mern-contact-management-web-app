@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default function ContactList({ contacts, refresh }) {
   const deleteContact = async (id) => {
-    await axios.delete(`http://localhost:5000/api/contacts/${id}`);
+    await axios.delete(`https://mern-contact-management-web-app.onrender.com/api/contacts/${id}`);
     refresh();
   };
 
