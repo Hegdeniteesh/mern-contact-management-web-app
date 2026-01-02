@@ -7,7 +7,7 @@ function App() {
   const [contacts, setContacts] = useState([]);
 
   const fetchContacts = async () => {
-    const res = await axios.get("http://localhost:5000/api/contacts");
+    const res = await axios.get("https://mern-contact-management-web-app.onrender.com/api/contacts");
     setContacts(res.data);
   };
 
