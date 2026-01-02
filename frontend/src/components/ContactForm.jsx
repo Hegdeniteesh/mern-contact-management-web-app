@@ -17,7 +17,7 @@ export default function ContactForm({ refresh }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/api/contacts", form);
+    await axios.post("https://mern-contact-management-web-app.onrender.com/api/contacts", form);
     setForm({ name: "", email: "", phone: "", message: "" });
     setSuccess("Contact submitted successfully");
     refresh();
