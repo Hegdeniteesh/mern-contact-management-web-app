@@ -17,7 +17,6 @@ export default function ContactForm({ refresh }) {
     /\S+@\S+\.\S+/.test(form.email) &&
     form.phone.trim().length >= 7;
 
-  // ✅ reusable change handler
   const handleChange = (field) => (event) => {
     setSuccess("");
     setForm((prev) => ({
