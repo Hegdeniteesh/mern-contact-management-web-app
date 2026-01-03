@@ -17,29 +17,35 @@ export default function ContactForm({ refresh }) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios.post("https://mern-contact-management-web-app.onrender.com/api/contacts", form);
+    await axios.post(
+      "https://mern-contact-management-web-app.onrender.com/api/contacts",
+      form
+    );
     setForm({ name: "", email: "", phone: "", message: "" });
     setSuccess("Contact submitted successfully");
     refresh();
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      {success && <p style={{ color: "green" }}>{success}</p>}
+    <form className="form" onSubmit={submitHandler}>
+      <h2>Add Contact</h2>
 
       <input
+        type="text"
         placeholder="Name"
         value={form.name}
         onChange={(e) => setForm({ ...form, name: e.target.value })}
       />
 
       <input
+        type="email"
         placeholder="Email"
         value={form.email}
         onChange={(e) => setForm({ ...form, email: e.target.value })}
       />
 
       <input
+        type="text"
         placeholder="Phone"
         value={form.phone}
         onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -52,6 +58,8 @@ export default function ContactForm({ refresh }) {
       />
 
       <button disabled={!isValid}>Submit</button>
+
+      {success && <p className="success">{success}</p>}
     </form>
   );
 }

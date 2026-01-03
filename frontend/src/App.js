@@ -7,7 +7,9 @@ function App() {
   const [contacts, setContacts] = useState([]);
 
   const fetchContacts = async () => {
-    const res = await axios.get("https://mern-contact-management-web-app.onrender.com/api/contacts");
+    const res = await axios.get(
+      "https://mern-contact-management-web-app.onrender.com/api/contacts"
+    );
     setContacts(res.data);
   };
 
@@ -16,10 +18,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h2>Contact Management App</h2>
-      <ContactForm refresh={fetchContacts} />
-      <ContactList contacts={contacts} refresh={fetchContacts} />
+    <div className="container">
+      <h1>Contact Management App</h1>
+
+      <div className="card">
+        <ContactForm refresh={fetchContacts} />
+      </div>
+
+      <div className="card">
+        <ContactList contacts={contacts} refresh={fetchContacts} />
+      </div>
     </div>
   );
 }
