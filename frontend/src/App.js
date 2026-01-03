@@ -1,11 +1,12 @@
-import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import "./App.css";
 
 function App() {
   const [contacts, setContacts] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   const fetchContacts = async () => {
     const res = await axios.get(
@@ -19,10 +20,17 @@ function App() {
   }, []);
 
   return (
-   <div className="app">
+   <div className={`app ${darkMode ? "dark" : ""}`}>
       <header className="header">
         <h1>Contact Management</h1>
         <p>Manage your contacts easily and securely</p>
+
+        <button
+          className="toggle-btn"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+        </button>
       </header>
 
       <main className="main">

@@ -184,3 +184,62 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Dark Mode Styles */
+
+.dark {
+  background: #111827;
+  color: #e5e7eb;
+}
+
+.dark .header {
+  background: linear-gradient(135deg, #111827, #1f2933);
+}
+
+.dark .footer {
+  background: #1f2933;
+  color: #d1d5db;
+}
+
+.dark .card {
+  background: #1f2933;
+  color: #e5e7eb;
+}
+
+.dark .form input,
+.dark .form textarea {
+  background: #111827;
+  color: #e5e7eb;
+  border: 1px solid #374151;
+}
+
+.dark .contact-card {
+  background: #111827;
+}
+
+.dark .empty {
+  color: #9ca3af;
+}
+
+/* Toggle button */
+.toggle-btn {
+  margin-top: 15px;
+  background: white;
+  color: #111827;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+.dark .toggle-btn {
+  background: #374151;
+  color: #f9fafb;
+}
+
