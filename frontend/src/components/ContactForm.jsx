@@ -28,14 +28,19 @@ export default function ContactForm({ refresh }) {
       "https://mern-contact-management-web-app.onrender.com/api/contacts",
       form
     );
+
     setForm(initialFormState);
     setSuccess("Contact submitted successfully");
     refresh();
+
+  setTimeout(() => setSuccess(""), 2000);
   };
 
   return (
     <section className="card">
       <h2>Add New Contact</h2>
+
+      {success && <p className="success">{success}</p>}
 
       <form className="form" onSubmit={submitHandler}>
         <input
@@ -75,7 +80,6 @@ export default function ContactForm({ refresh }) {
 
         <button disabled={!isValid}>Save Contact</button>
 
-        {success && <p className="success">{success}</p>}
       </form>
     </section>
   );
