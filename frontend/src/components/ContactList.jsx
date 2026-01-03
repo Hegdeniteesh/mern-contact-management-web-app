@@ -8,40 +8,33 @@ export default function ContactList({ contacts, refresh }) {
     refresh();
   };
 
+  const total = contacts.length;
+  const hasContacts = total > 0;
+
   return (
-    <div>
+      <section className="card">
       <h2>Saved Contacts</h2>
 
-      <div className="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+      {contacts.length === 0 ? (
+        <p className="empty">No contacts added yet.</p>
+      ) : (
+        <div className="contact-grid">
+          {contacts.map((c) => (
+            <div className="contact-card" key={c._id}>
+              <h3>{c.name}</h3>
+              <p>{c.email}</p>
+              <p>{c.phone}</p>
 
-          <tbody>
-            {contacts.map((c) => (
-              <tr key={c._id}>
-                <td>{c.name}</td>
-                <td>{c.email}</td>
-                <td>{c.phone}</td>
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteContact(c._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+              <button
+                className="delete-btn"
+                onClick={() => deleteContact(c._id)}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

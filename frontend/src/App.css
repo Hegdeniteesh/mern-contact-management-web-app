@@ -1,33 +1,68 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f4f6f8;
+  background: #f2f4f8;
+  color: #333;
 }
 
-.container {
-  max-width: 1000px;
+/* Layout */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.header p {
+  opacity: 0.9;
+}
+
+.main {
+  flex: 1;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-h1 {
+.footer {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 10px;
+  background: #e5e7eb;
+  font-size: 14px;
 }
 
+/* Card */
 .card {
   background: white;
   padding: 20px;
-  margin-bottom: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
-/* FORM */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+}
+
+/* Form */
 .form {
   display: flex;
   flex-direction: column;
@@ -36,83 +71,116 @@ h1 {
 
 .form input,
 .form textarea {
-  padding: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
   font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form textarea {
+  resize: none;
+  height: 80px;
 }
 
 .form button {
-  background: #007bff;
+  background: #2563eb;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.form button:hover:not(:disabled) {
+  background: #1e40af;
+  transform: translateY(-2px);
 }
 
 .form button:disabled {
-  background: #aaa;
+  background: #9ca3af;
   cursor: not-allowed;
 }
 
 .success {
   color: green;
-  margin-top: 5px;
+  font-size: 14px;
 }
 
-/* TABLE */
-.table-wrapper {
-  overflow-x: auto;
+/* Contact Cards  */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.contact-card {
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #2563eb;
+  transition: all 0.3s ease;
 }
 
-th,
-td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+.contact-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
 }
 
+.contact-card h3 {
+  margin: 0 0 5px;
+}
+
+/* Delete Button  */
 .delete-btn {
-  background: #dc3545;
+  margin-top: 10px;
+  background: #dc2626;
   color: white;
   border: none;
   padding: 6px 10px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.3s ease;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 22px;
-  }
+.delete-btn:hover {
+  background: #b91c1c;
+  transform: scale(1.05);
+}
 
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
+.empty {
+  color: #6b7280;
+}
 
-  thead {
-    display: none;
+/* Page Load Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
-
-  tr {
-    margin-bottom: 15px;
-    background: #f9f9f9;
-    padding: 10px;
-    border-radius: 6px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  td {
-    border: none;
-    padding: 6px 0;
+.card {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
   }
 }

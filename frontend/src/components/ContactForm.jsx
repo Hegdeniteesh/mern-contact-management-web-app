@@ -1,65 +1,82 @@
 import { useState } from "react";
 import axios from "axios";
 
+const initialFormState = {
+  name: "",
+  email: "",
+  phone: "",
+  message: "",
+};
+
 export default function ContactForm({ refresh }) {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
+  const [form, setForm] = useState(initialFormState);
   const [success, setSuccess] = useState("");
 
   const isValid =
-    form.name.trim() !== "" &&
-    form.email.includes("@") &&
-    form.phone.trim() !== "";
+    form.name.trim().length > 1 &&
+    /\S+@\S+\.\S+/.test(form.email) &&
+    form.phone.trim().length >= 7;
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const handleChange = (field) => (event) => {
+    setSuccess("");
+    setForm((prev) => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
     await axios.post(
       "https://mern-contact-management-web-app.onrender.com/api/contacts",
       form
     );
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setForm(initialFormState);
     setSuccess("Contact submitted successfully");
     refresh();
   };
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <h2>Add Contact</h2>
+    <section className="card">
+      <h2>Add New Contact</h2>
 
-      <input
-        type="text"
-        placeholder="Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
-      />
+      <form className="form" onSubmit={submitHandler}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={form.name}
+          onChange={(e) =>
+            setForm({ ...form, name: e.target.value })
+          }
+        />
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={(e) => setForm({ ...form, email: e.target.value })}
-      />
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={form.email}
+          onChange={(e) =>
+            setForm({ ...form, email: e.target.value })
+          }
+        />
 
-      <input
-        type="text"
-        placeholder="Phone"
-        value={form.phone}
-        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-      />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={form.phone}
+          onChange={(e) =>
+            setForm({ ...form, phone: e.target.value })
+          }
+        />
 
-      <textarea
-        placeholder="Message"
-        value={form.message}
-        onChange={(e) => setForm({ ...form, message: e.target.value })}
-      />
+        <textarea
+          placeholder="Message (optional)"
+          value={form.message}
+          onChange={(e) =>
+            setForm({ ...form, message: e.target.value })
+          }
+        />
 
-      <button disabled={!isValid}>Submit</button>
+        <button disabled={!isValid}>Save Contact</button>
 
-      {success && <p className="success">{success}</p>}
-    </form>
+        {success && <p className="success">{success}</p>}
+      </form>
+    </section>
   );
 }

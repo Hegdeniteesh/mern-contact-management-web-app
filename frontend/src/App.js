@@ -1,3 +1,4 @@
+import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ContactForm from "./components/ContactForm";
@@ -18,16 +19,20 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Contact Management App</h1>
+   <div className="app">
+      <header className="header">
+        <h1>Contact Management</h1>
+        <p>Manage your contacts easily and securely</p>
+      </header>
 
-      <div className="card">
+      <main className="main">
         <ContactForm refresh={fetchContacts} />
-      </div>
-
-      <div className="card">
         <ContactList contacts={contacts} refresh={fetchContacts} />
-      </div>
+      </main>
+
+      <footer className="footer">
+        <p>© 2026 Contact Management App</p>
+      </footer>
     </div>
   );
 }
