@@ -1,22 +1,20 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
 export default function ContactList({ contacts, refresh }) {
   const [deleteMsg, setDeleteMsg] = useState("");
+
   const deleteContact = async (id) => {
     await axios.delete(
       `https://mern-contact-management-web-app.onrender.com/api/contacts/${id}`
     );
 
-    setDeleteMsg("Contact deleted successfully");
+    setDeleteMsg("Contact deleted successfully ✔");
     refresh();
 
     // auto hide message
     setTimeout(() => setDeleteMsg(""), 2000);
   };
-
-  const total = contacts.length;
-  const hasContacts = total > 0;
 
   return (
     <section className="card">
