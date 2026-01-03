@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const initialFormState = {
@@ -17,23 +17,28 @@ export default function ContactForm({ refresh }) {
     /\S+@\S+\.\S+/.test(form.email) &&
     form.phone.trim().length >= 7;
 
+  // ✅ reusable change handler
   const handleChange = (field) => (event) => {
     setSuccess("");
-    setForm((prev) => ({ ...prev, [field]: event.target.value }));
+    setForm((prev) => ({
+      ...prev,
+      [field]: event.target.value,
+    }));
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
+
     await axios.post(
       "https://mern-contact-management-web-app.onrender.com/api/contacts",
       form
     );
 
     setForm(initialFormState);
-    setSuccess("Contact submitted successfully");
+    setSuccess("Contact submitted successfully ✔");
     refresh();
 
-  setTimeout(() => setSuccess(""), 2000);
+    setTimeout(() => setSuccess(""), 2000);
   };
 
   return (
@@ -47,39 +52,30 @@ export default function ContactForm({ refresh }) {
           type="text"
           placeholder="Full Name"
           value={form.name}
-          onChange={(e) =>
-            setForm({ ...form, name: e.target.value })
-          }
+          onChange={handleChange("name")}
         />
 
         <input
           type="email"
           placeholder="Email Address"
           value={form.email}
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
+          onChange={handleChange("email")}
         />
 
         <input
           type="text"
           placeholder="Phone Number"
           value={form.phone}
-          onChange={(e) =>
-            setForm({ ...form, phone: e.target.value })
-          }
+          onChange={handleChange("phone")}
         />
 
         <textarea
           placeholder="Message (optional)"
           value={form.message}
-          onChange={(e) =>
-            setForm({ ...form, message: e.target.value })
-          }
+          onChange={handleChange("message")}
         />
 
         <button disabled={!isValid}>Save Contact</button>
-
       </form>
     </section>
   );
