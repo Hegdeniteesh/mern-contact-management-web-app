@@ -15,13 +15,19 @@ export default function ContactForm({ refresh }) {
   const isValid =
     form.name.trim().length > 1 &&
     /\S+@\S+\.\S+/.test(form.email) &&
-    form.phone.trim().length = 10;
+    /^[6-9]\d{9}$/.test(form.phone);
 
   const handleChange = (field) => (event) => {
+    let value = event.target.value;
+
+    if (field === "phone") {
+      value = value.replace(/\D/g, "").slice(0, 10);
+    }
+
     setSuccess("");
     setForm((prev) => ({
       ...prev,
-      [field]: event.target.value,
+      [field]: value,
     }));
   };
 
