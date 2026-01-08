@@ -15,7 +15,7 @@ export default function ContactForm({ refresh }) {
   const isValid =
     form.name.trim().length > 1 &&
     /\S+@\S+\.\S+/.test(form.email) &&
-    form.phone.trim().length >= 7;
+    form.phone.trim().length = 10;
 
   const handleChange = (field) => (event) => {
     setSuccess("");
